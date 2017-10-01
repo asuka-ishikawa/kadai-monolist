@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"
+    
     <title>Monolist</title>
     <%= csrf_meta_tags %>
-
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <!--Bootstrap CDNより引用-->
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!--app/assets/stylesheets/application.css にコーディングされたCSSが読み込まれる-->
+    
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--Bootstrap CDNより引用-->
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/navbar' %>
+    
+    <%= yield :cover %>
+    <!--viewで content_for :coverで定義され、その内容がここに埋め込まれる-->
+    <!--横幅全体を使ったレイアウトにする///"container"の外側に配置-->
+    
+    <div class="container">
+      <%= render 'layouts/flash_messages' %>
+      
+      <%= yield %>
+    </div>
+
+    <%= render 'layouts/footer' %>
   </body>
 </html>

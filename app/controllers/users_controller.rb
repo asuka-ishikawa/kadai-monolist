@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :require_user_logged_in, only: [:show]
+  # applicationのprivateメソッドで定義したものを使う
+  
   def show
     @user = User.find(params[:id])
   end

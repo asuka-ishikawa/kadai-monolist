@@ -1,0 +1,19 @@
+<% if current_user.want?(item) %>
+  <%= form_tag(ownership_path(item.id), method: :delete) do %>
+    <%= hidden_field_tag :item_id, item.id %>
+    <%= hidden_field_tag :type, 'Want' %>
+    <%= submit_tag 'Want', class: 'btn btn-success' %>
+  <% end %>
+<% else %>
+  <%= form_tag(ownerships_path) do %>
+    <%= hidden_field_tag :item_code, item.code %>
+    <%= hidden_field_tag :type, 'Want' %>
+    <%= submit_tag 'Want it', class:'btn btn-primary' %>
+  <% end %>
+<% end %>
+
+<!--wantしているか否かでボタンをだし分ける-->
+<!--すでにwantしていて、それをdestroyする場合　保存されていた item_id があるのでそれをを渡す-->
+<!--未wantで新しくwantする場合、item_id がないので item_code を渡す-->
+<!--typeも渡す-->
+<!--ownership_controllerでも使用されているので要確認-->

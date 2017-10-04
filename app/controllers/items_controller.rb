@@ -19,30 +19,19 @@ class ItemsController < ApplicationController
       # 上記のresultsからItemモデルのインスタンスを作成
       # インスタンスを使うのはresultを直接扱うより、扱い易いから。
       results.each do |result|
-        # 扱い易いように Item としてインスタンスを作成する（保存しない。ここで保存＝検索結果全て保存だから）
-        item = Item.new(read(result))
+        item = Item.find_or_initialize_by(read(result))
+          # 扱い易いように Item としてインスタンスを作成する
+          # item = Item.new(read(result))で全てを保存していないインスタンスにするのではなく
+          # すでに保存されているItemに関してはitem.idの値も含めたいので.find_or_initialize_by
+          # item.idはフォームからUnwantするときに使用する
         @items << item
         # @items << item でitemを[]に追加していく
       end
     end
   end
   
-  private
-  
-  def read(result)
-    code = result['itemCode']
-    name = result['itemName']
-    url = result['itemUrl']
-    image_url = result['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '')
-    
-    return {
-      code: code,
-      name: name,
-      url: url,
-      image_url: image_url,
-    }
+  def show
+    @item = Item.find(params[:id])
+    @want_users = @item.want_users
   end
-  # def read(result)は少し複雑な検索結果から、必要な値を読みだして、最後に配列としてreturnしているだけ
-  # 画像サイズ128は小さすぎる 無理やり元画像を取得している
-  # gsub///文字置換用メソッド 第一引数を見つけだして第二引数に置換する。この場合カラ文字＝削除する
 end

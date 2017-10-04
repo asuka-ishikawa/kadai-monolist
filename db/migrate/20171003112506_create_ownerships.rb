@@ -8,7 +8,7 @@ class CreateOwnerships < ActiveRecord::Migration[5.0]
       t.timestamps
       
       t.index [:user_id, :item_id, :type], unique: true
-      # :type には WANT HAVE が入る。WANTとHAVEに同じユーザが同じアイテムをそれぞれの場所に保存できる
+      # :type には WANT HAVE が入る同一ユーザが同一アイテムに対して複数回want/haveできないようにする制約
     end
   end
 end

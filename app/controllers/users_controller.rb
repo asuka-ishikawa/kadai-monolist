@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @items = @user.items.uniq
     @count_want = @user.want_items.count
+    @count_have = @user.have_items.count
     # want have で重複した場合.uniqで重複を防げる
   end
 

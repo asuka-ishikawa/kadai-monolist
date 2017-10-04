@@ -12,12 +12,13 @@
               <p class="item-title"><%= link_to item.name, item %></p>
               <!-- item GET /items/:id(.:format) items#show アイテムが保存済ならアイテムの名前(文字列)にアイテムの詳細ページへのリンクを貼る-->
               <% else %>
-                <p class"item-title"><%= item.name %></p>
-              <!--アイテムが保存されていなければ、アイテムの名前だけ表示する-->
+                <p class="item-title"><%= item.name %></p>
+              <!--アイテムが保存されていなければ、アイテムの名前だけ表示する(リンクはつけない)-->
               <% end %>
               <div class="buttons text-center">
                 <% if logged_in? %>
                   <%= render 'ownerships/want_button', item: item %>
+                  <%= render 'ownerships/have_button', item: item %>
                 <% end %>
               </div>
             </div>

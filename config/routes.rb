@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   # ownerships///中間テーブル
   
   get 'rankings/want', to: 'rankings#want'
+  get 'rankings/have', to: 'rankings#have'
 end

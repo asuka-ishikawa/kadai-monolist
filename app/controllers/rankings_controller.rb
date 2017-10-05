@@ -10,4 +10,9 @@ class RankingsController < ApplicationController
     # @itemsはランキング通りの並び順
     # @itemsと@ranking_countsを利用して、ランキングページを作成する
   end
+  
+  def have
+    @ranking_counts = Have.ranking
+    @items = Item.find(@ranking_counts.keys)
+  end
 end

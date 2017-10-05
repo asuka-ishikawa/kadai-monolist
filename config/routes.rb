@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   # (show)共有したいものだけを保存する///Want,Have機能の実装時にItemを保存する
   # resources :ownerships, only: [:create, :destroy]
   # ownerships///中間テーブル
+  
+  get 'rankings/want', to: 'rankings#want'
 end

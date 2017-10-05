@@ -1,0 +1,35 @@
+<!--ランキングのついた商品を表示するだけ-->
+<h1>Wantランキング</h1>
+<% if @items.present? %>
+  <div class="row">
+    
+    <!--want.rb によって.limit(10) wantされたitem 10個がwant数の多い順に-->
+    <!--index///@itemsを一つずつ取り出す作業＝ループの回数が代入される(面白い！)-->
+    <!--ループの回数は 0 から始まる 0.1.2....-->
+    <% @items.each_with_index do |item, index| %>
+      <div class="item">
+        <div class="col-md-3 col-sm-4 col-xs-12">
+          <div class="panel panel-default">
+            <div class="panel-heading text-center">
+              <img src="<%= item.image_url %>" alt="" >
+            </div>
+            <div class="panel-body">
+              <p class="item-title"><%= link_to item.name, item %></p>
+              <div class="buttons text-center">
+                <% if logged_in? %>
+                  <%= render 'ownerships/want_button', item: item %>
+                <% end %>
+              </div>
+            </div>
+            <div class="panel-footer">
+              <p class="text-center"><%= index+1 %>位: <%= @ranking_counts[item.id] %> Wants</p>
+              <!--index///want多い順itemを取り出す際のループ回数(0~) /// 1位＝ループ回数(0)+1-->
+              <!--@ranking_counts は {item_id => Want のカウント}になっているので-->
+              <!--  @ranking_counts[item.id] で item.id のカウントを取得-->
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

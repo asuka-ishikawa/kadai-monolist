@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
           # すでに保存されているItemに関してはitem.idの値も含めたいので.find_or_initialize_by
           # item.idはフォームからUnwantするときに使用する
         @items << item
-        # @items << item でitemを[]に追加していく
+          # @items << item でitemを[]に追加していく
       end
     end
   end

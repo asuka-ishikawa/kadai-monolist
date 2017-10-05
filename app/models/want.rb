@@ -7,4 +7,13 @@ class Want < Ownership
 # Wantのテーブルは継承元Ownership の保存先テーブルownerships内で
 # type名がclass名(Want)と同じWantであるレコードだけをWantクラスのインスタンスとして扱う
 
+  def self.ranking
+    self.group(:item_id).order('count_item_id DESC').limit(10).count(:item_id)
+  end
+  # クラスメソッド：誰が見ても、同じ結果になるもの/インスタンスが必要ないもの
+  # 'count_item_id DESC'///wantのカウントが多い順にならべる
+  # .group(:item_id)はレコードをitem_idカラムでグループ化している
+  # .count(:item_id)でグループ化させたitem_idの数をカウント
+  # count_item_idは.count(:item_id)をするために一時的なカウントカラム
+  # .limit(10)　ランキングに表示する数
 end
